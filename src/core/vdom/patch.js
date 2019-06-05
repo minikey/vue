@@ -479,7 +479,9 @@ export function createPatchFunction (backend) {
       const vnode = children[i]
       const key = vnode.key
       if (isDef(key)) {
-        if (seenKeys[key]) {
+        if (typeof key !== 'string') {
+          warn(`the key should be string.`)
+        } else if (seenKeys[key]) {
           warn(
             `Duplicate keys detected: '${key}'. This may cause an update error.`,
             vnode.context
